@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+
+<orders>
+    <order>
+        <count>37</count>
+        <price>49.99</price>
+        <book>
+            <isbn>0130897930</isbn>
+            <title>Core Web Programming Second Edition</title>
+            <authors>
+                <author>Marty Hall</author>
+                <author>Larry Brown</author>
+            </authors>
+        </book>
+    </order>
+    <order>
+        <count>1</count>
+        <price>9.95</price>
+        <yacht>
+            <manufacturer>Luxury Yachts, Inc.</manufacturer>
+            <model>M-1</model>
+            <standardFeatures oars="plastic"
+                              lifeVests="none">
+                false
+            </standardFeatures>
+        </yacht>
+    </order>
+    <order>
+        <count>3</count>
+        <price>22.22</price>
+        <book>
+            <isbn>B000059Z4H</isbn>
+            <title>Harry Potter and the Order of the Phoenix</title>
+            <authors>
+                <author>J.K. Rowling</author>
+            </authors>
+        </book>
+    </order>
+    <order>
+        <count>2</count>
+        <price>10452689.01</price>
+        <yacht>
+            <manufacturer>We B Boats, Inc.</manufacturer>
+            <model>236-A</model>
+            <standardFeatures bowlingAlley="double"
+                              tennisCourt="grass">
+                true
+            </standardFeatures>
+        </yacht>
+    </order>
+    <order>
+        <count>13</count>
+        <price>49.99</price>
+        <book>
+            <isbn>0130897935</isbn>
+            <title>C Programming Second Edition</title>
+            <authors>
+                <author>Some nerd</author>
+                <author>Larry Brown</author>
+            </authors>
+        </book>
+    </order>
+</orders>
