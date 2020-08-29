@@ -10,7 +10,7 @@ public class Main {
 
         System.out.println("############### Print info of the order with max count #################");
         System.out.println("Count: " + max.getCount());
-        System.out.println("Title: " + max.getBook().getTitle());
+        System.out.println("Title: " + ((Book)max.getOrderItem()).getTitle());
         System.out.println("Price: " + max.getPrice());
 
         System.out.println();

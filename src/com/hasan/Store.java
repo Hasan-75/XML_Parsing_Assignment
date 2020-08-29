@@ -1,6 +1,5 @@
 package com.hasan;
 
-import jdk.nashorn.internal.runtime.regexp.joni.constants.NodeType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,11 +14,11 @@ public class Store {
     private List<Order> orders;
     private int numberOfOrders;
 
-    private Store(){
+    private Store() {
         orders = new ArrayList<>();
     }
 
-    public static Store builder(String filename){
+    public static Store builder(String filename) {
         Store store = new Store();
         store.parseAll(filename);
         return store;
@@ -41,7 +40,7 @@ public class Store {
         this.numberOfOrders = numberOfOrders;
     }
 
-    private void parseAll(String filename){
+    private void parseAll(String filename) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -49,13 +48,13 @@ public class Store {
             NodeList list = doc.getElementsByTagName("order");
             for (int o = 0; o < list.getLength(); o++) {
                 Node n = list.item(o);
-                if(n.getNodeType()==Node.ELEMENT_NODE){
+                if (n.getNodeType() == Node.ELEMENT_NODE) {
                     Element order = (Element) n;
                     //System.out.println(e.getElementsByTagName("count").item(0).getTextContent());
                     NodeList books = order.getElementsByTagName("book");
-                    for(int b=0; b<books.getLength(); b++){
+                    for (int b = 0; b < books.getLength(); b++) {
                         Node bn = books.item(b);
-                        if(bn.getNodeType()==Node.ELEMENT_NODE){
+                        if (bn.getNodeType() == Node.ELEMENT_NODE) {
                             Element book = (Element) bn;
                             Order orderObj = new Order();
                             orderObj.setCount(Integer.parseInt(order.getElementsByTagName("count").item(0).getTextContent()));
@@ -67,13 +66,31 @@ public class Store {
 
                             Node authorsNode = book.getElementsByTagName("authors").item(0);
                             NodeList authors = authorsNode.getChildNodes();
-                            for(int a=0; a<authors.getLength(); a++){
-                                if(authors.item(a).getNodeType()== Node.ELEMENT_NODE){
+                            for (int a = 0; a < authors.getLength(); a++) {
+                                if (authors.item(a).getNodeType() == Node.ELEMENT_NODE) {
                                     Element author = (Element) authors.item(a);
                                     bookObj.addAuthor(author.getTextContent());
                                 }
                             }
-                            orderObj.setBook(bookObj);
+                            orderObj.setOrderItem(bookObj);
+                            orders.add(orderObj);
+                        }
+                    }
+
+                    NodeList yatches = order.getElementsByTagName("yacht");
+                    for (int y = 0; y < yatches.getLength(); y++) {
+                        Node yn = yatches.item(y);
+                        if (yn.getNodeType() == Node.ELEMENT_NODE) {
+                            Element yatch = (Element) yn;
+                            Order orderObj = new Order();
+                            orderObj.setCount(Integer.parseInt(order.getElementsByTagName("count").item(0).getTextContent()));
+                            orderObj.setPrice(order.getElementsByTagName("price").item(0).getTextContent());
+
+                            Yatch yatchObj = new Yatch();
+                            yatchObj.setModel(yatch.getElementsByTagName("model").item(0).getTextContent());
+                            yatchObj.setManufacturer(yatch.getElementsByTagName("manufacturer").item(0).getTextContent());
+                            yatchObj.setHasStandadFeatures(Boolean.parseBoolean(yatch.getElementsByTagName("standardFeatures").item(0).getTextContent()));
+                            orderObj.setOrderItem(yatchObj);
                             orders.add(orderObj);
                         }
                     }
@@ -89,11 +106,11 @@ public class Store {
         }
     }
 
-    public Order getOrderWithMaxCount(){
+    public Order getOrderWithMaxCount() {
         Order max = null;
         int curMax = 0;
-        for(Order o:orders){
-            if(o.getCount()>curMax){
+        for (Order o : orders) {
+            if (o.getOrderItem().getType().equals("book") && o.getCount() > curMax) {
                 curMax = o.getCount();
                 max = o;
             }
@@ -101,12 +118,20 @@ public class Store {
         return max;
     }
 
-    public int getCountByBookTitle(String title){
+    public int getCountByBookTitle(String title) {
         int c = 0;
-        for(Order o : orders){
-            if(o.getBook().getTitle().equals(title.trim()))
-                c+=o.getCount();
+        for (Order o : orders) {
+            if (o.getOrderItem().getType().equals("book") && ((Book) o.getOrderItem()).getTitle().equals(title.trim()))
+                c += o.getCount();
         }
         return c;
+    }
+
+    public Book getBookByTitle(String title) {
+        for (Order o : orders) {
+            if (o.getOrderItem().getType().equals("book") && ((Book) o.getOrderItem()).getTitle().equals(title.trim()))
+                return (Book) o.getOrderItem();
+        }
+        return null;
     }
 }

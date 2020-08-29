@@ -3,7 +3,7 @@ package com.hasan;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book implements OrderItem {
     private String isbn, title;
     private List<String> authors = new ArrayList<>();
 
@@ -51,5 +51,10 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", authors=" + authors +
                 '}';
+    }
+
+    @Override
+    public String getType() {
+        return "book";
     }
 }

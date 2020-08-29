@@ -3,15 +3,15 @@ package com.hasan;
 public class Order {
     private int count;
     private String price;
-    private Book book;
+    private OrderItem orderItem;
 
     public Order() {
     }
 
-    public Order(int count, String price, Book book) {
+    public Order(int count, String price, OrderItem orderItem) {
         this.count = count;
         this.price = price;
-        this.book = book;
+        this.orderItem = orderItem;
     }
 
     public int getCount() {
@@ -30,12 +30,12 @@ public class Order {
         this.price = price;
     }
 
-    public Book getBook() {
-        return book;
+    public OrderItem getOrderItem() {
+        return orderItem;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Order {
         return "Order{" +
                 "count=" + count +
                 ", price='" + price + '\'' +
-                ", book=" + book +
+                ", orderItem=" + orderItem +
                 '}';
     }
 }
