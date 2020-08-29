@@ -101,11 +101,12 @@ public class Store {
         return max;
     }
 
-    public Order getOrderByBookTitle(String title){
+    public int getCountByBookTitle(String title){
+        int c = 0;
         for(Order o : orders){
             if(o.getBook().getTitle().equals(title.trim()))
-                return o;
+                c+=o.getCount();
         }
-        return null;
+        return c;
     }
 }

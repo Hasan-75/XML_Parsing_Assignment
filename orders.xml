@@ -52,10 +52,10 @@
         <count>13</count>
         <price>49.99</price>
         <book>
-            <isbn>0130897935</isbn>
-            <title>C Programming Second Edition</title>
+            <isbn>0130897930</isbn>
+            <title>Core Web Programming Second Edition</title>
             <authors>
-                <author>Some nerd</author>
+                <author>Marty Hall</author>
                 <author>Larry Brown</author>
             </authors>
         </book>

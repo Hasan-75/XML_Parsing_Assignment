@@ -17,9 +17,9 @@ public class Main {
         System.out.println();
 
         System.out.println("############### Print count of a book by title #################");
-        String title = "Harry Potter and the Order of the Phoenix";
+        String title = "Core Web Programming Second Edition";
         System.out.println("Title: " + title);
-        System.out.println("Count: " + myStore.getOrderByBookTitle(title).getCount());
+        System.out.println("Total Count: " + myStore.getCountByBookTitle(title));
         System.out.println();
 
     }
